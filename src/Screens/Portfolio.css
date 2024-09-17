@@ -1,0 +1,280 @@
+/* src/Portfolio.css */
+
+/* Portfolio Container */
+.portfolio-container {
+    display: flex;
+    max-width: 100%;
+    margin: 0px auto;
+    background-color: #ffffff; /* Light Gray */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Left Column */
+.portfolio-left {
+    position: sticky;
+    top: 0px;
+    height: fit-content;
+    width: 25%;
+    padding: 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #f9f9f9; /* White */
+    color: #333333; /* Dark Gray */
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.profile-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.portfolio-left h1 {
+    margin: 10px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.contact-info p {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-info p i {
+    margin-right: 5px;
+}
+
+.portfolio-left nav {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.portfolio-left nav a {
+    text-decoration: none;
+    color: #333333; /* Dark Gray */
+    padding: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.portfolio-left nav a.active {
+    font-weight: bold;
+    color: #FFA500; /* Orange */
+}
+
+.social-icons {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.social-icons a {
+    color: #333333; /* Dark Gray */
+    font-size: 24px;
+    margin: 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #FFA500; /* Orange */
+}
+
+/* Right Column */
+.portfolio-right {
+    flex: 1;
+    padding: 60px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: #ffffff; /* White */
+    color: #333333; /* Dark Gray */
+    overflow-y: auto;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section h2 {
+    margin-top: 0;
+    color: #333333; /* Dark Gray */
+    padding: 10px;
+}
+
+.section p {
+    color: #666666; /* Gray */
+    padding: 10px;
+}
+
+.project {
+    margin-bottom: 20px;
+}
+
+.project h3 {
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.skills-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.skill-category {
+    margin-bottom: 20px;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.skill {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #333333; /* Dark Gray */
+    transition: transform 0.3s ease-in-out;
+}
+
+.skill:hover {
+    transform: scale(1.1);
+}
+
+/* Skill Colors */
+.skill.skill-react {
+    background-color: #61dafb; /* React Blue */
+}
+
+.skill.skill-react-native {
+    background-color: #0088cc; /* React Native Blue */
+}
+
+.skill.skill-nextjs {
+    background-color: #000000; /* Next.js Black */
+}
+
+.skill.skill-js {
+    background-color: #f0db4f; /* JavaScript Yellow */
+}
+
+.skill.skill-html {
+    background-color: #e34c26; /* HTML Red */
+}
+
+.skill.skill-css {
+    background-color: #2965f1; /* CSS Blue */
+}
+
+.skill.skill-nodejs {
+    background-color: #68a063; /* Node.js Green */
+}
+
+.skill.skill-express {
+    background-color: #000000; /* Express Black */
+}
+
+.skill.skill-mongodb {
+    background-color: #4db33d; /* MongoDB Green */
+}
+
+.skill.skill-graphql {
+    background-color: #e10098; /* GraphQL Pink */
+}
+
+.skill.skill-restapi {
+    background-color: #6db33f; /* REST API Green */
+}
+
+.skill.skill-git {
+    background-color: #f05032; /* Git Orange */
+}
+
+.skill.skill-jira {
+    background-color: #205081; /* Jira Blue */
+}
+
+.skill.skill-aws {
+    background-color: #ff9900; /* AWS Orange */
+}
+
+.skill.skill-docker {
+    background-color: #2496ed; /* Docker Blue */
+}
+
+.skill.skill-cicd {
+    background-color: #316192; /* CI/CD Blue */
+}
+
+.skill.skill-agile {
+    background-color: #f6921e; /* Agile Yellow */
+}
+
+.skill.skill-problem-solving {
+    background-color: #34a853; /* Problem Solving Green */
+}
+
+.skill.skill-team-leadership {
+    background-color: #fbbc05; /* Team Leadership Yellow */
+}
+
+.skill.skill-uiux {
+    background-color: #673ab7; /* UI/UX Purple */
+}
+
+@media screen and (max-width: 768px) {
+    .portfolio-container {
+        flex-direction: column;
+    }
+
+    .portfolio-left {
+        position: static;
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .portfolio-right {
+        width: 100%;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    /* Adjust padding for smaller screens in skills list */
+    .skills-list {
+        padding: 5px; /* Adjust as needed */
+    }
+    .section p {
+        color: #666666; /* Gray */
+        padding: 0px;
+    }
+}

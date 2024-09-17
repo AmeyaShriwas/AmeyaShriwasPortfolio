@@ -1,0 +1,91 @@
+/* General Styles */
+.dashboard {
+    display: flex;
+    height: 100vh;
+    flex-direction: column; /* Column layout since there is no sidebar */
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 40px;
+    position: relative;
+  }
+  
+  /* Tabs Styles */
+  .dashboard-tabs {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .tab.active {
+    font-weight: bold;
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .tab-panel-content {
+    padding: 20px;
+  }
+  
+  /* Top Right Bar Styles */
+  .top-right-bar {
+    position: fixed; /* Fixed position to keep it at the top right */
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000; /* Ensure it stays above other content */
+  }
+  
+  .blinking-icon {
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  .logout-button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #ff4d4d;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .main-content {
+      padding: 10px;
+    }
+  
+    .tabs {
+      flex-direction: column;
+    }
+  
+    .tab {
+      width: 100%;
+    }
+  }
+  

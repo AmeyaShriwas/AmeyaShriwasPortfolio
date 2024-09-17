@@ -1,0 +1,16 @@
+nav {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  nav a {
+    padding: 10px 0;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+  }
+  
+  nav a.active {
+    color: blue;
+  }
+  

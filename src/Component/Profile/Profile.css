@@ -1,0 +1,86 @@
+.profile-container {
+    text-align: center;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .profile-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .name-animation {
+    font-size: 2em;
+    margin: 10px 0;
+    animation: fadeIn 2s;
+  }
+  
+  .subtitle {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .contact-info {
+    margin-bottom: 20px;
+  }
+  
+  .contact-info p {
+    margin: 10px 0;
+    font-size: 1em;
+    display: flex;
+    gap: 5px;
+  }
+  
+  .social-icons {
+    margin-bottom: 20px;
+  }
+  
+  .social-icon {
+    margin: 0 10px;
+    color: #333;
+    font-size: 1.5em;
+    text-decoration: none;
+  }
+  
+  .download-cv-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s;
+  }
+  
+  .download-cv-button:hover {
+    background-color: #0056b3;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+
+  .social-icon.linkedin {
+    color: #0077b5;
+}
+
+.social-icon.github {
+    color: #ffffff;
+}
+
+.social-icon.twitter {
+    color: #1da1f2;
+}

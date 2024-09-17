@@ -1,0 +1,36 @@
+/* Slider.css */
+.slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .slider-content {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .slider-item {
+    min-width: 100%
+  }
+  
+  .slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .slider-button.prev {
+    left: 10px;
+  }
+  
+  .slider-button.next {
+    right: 10px;
+  }
+  

@@ -1,0 +1,19 @@
+.section {
+    padding: 5%;
+  }
+  h2 {
+    font-size: 1em;
+    margin-bottom: 15px;
+  }
+  .experience {
+    margin-bottom: 30px;
+  }
+  h3 {
+    font-size: 1em;
+    margin-bottom: 5px;
+  }
+  p {
+    font-size: 0.8em;
+    line-height: 1;
+  }
+  

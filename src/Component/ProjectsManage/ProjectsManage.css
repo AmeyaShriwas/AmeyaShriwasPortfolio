@@ -1,0 +1,160 @@
+/* General Styles */
+.projects-manage {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .add-category {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .add-category input {
+    flex-grow: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .add-category button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .category-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .project-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .project-details {
+    margin-bottom: 15px;
+  }
+  
+  .project-details input,
+  .project-details textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .project-details textarea {
+    resize: vertical;
+  }
+  
+  .image-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .image-upload input[type="file"] {
+    display: none;
+  }
+  
+  .image-upload label {
+    cursor: pointer;
+  }
+  
+  .image-upload button,
+  .remove-project {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .image-upload button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .remove-project {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .image-item {
+    flex: 1 1 30%;
+  }
+  
+  .image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .add-project {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .update-content {
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .preview-section {
+    margin-top: 20px;
+  }
+  
+  .preview-category {
+    margin-bottom: 20px;
+  }
+  
+  .preview-project {
+    margin-bottom: 20px;
+  }
+  
+  .preview-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .preview-image-item {
+    flex: 1 1 30%;
+  }
+  
+  .preview-image-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  

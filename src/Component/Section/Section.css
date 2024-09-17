@@ -1,0 +1,10 @@
+.section {
+    padding: 50px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  

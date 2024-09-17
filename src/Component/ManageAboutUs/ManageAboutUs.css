@@ -1,0 +1,104 @@
+/* General Styles */
+.manage-about-us {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+  }
+  
+  h1 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .content-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .content-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .text-field {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .remove-button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .remove-button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .add-button {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .add-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .divider {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #ddd;
+  }
+  
+  .update-button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .update-button:hover {
+    background-color: #218838;
+  }
+  
+  .preview-section {
+    margin-top: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .preview-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .preview-line {
+    color: #555;
+    margin-bottom: 10px;
+  }
+  

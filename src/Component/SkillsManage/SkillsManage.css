@@ -1,0 +1,112 @@
+/* General Styles */
+.manage-skills {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .skills-container {
+    margin-bottom: 20px;
+  }
+  
+  .skill-card {
+    background-color: #f7f9fc;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .skill-details {
+    margin-bottom: 15px;
+  }
+  
+  .input-group,
+  .upload-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .input-group input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .remove-skill {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .upload-button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .upload-group input[type="file"] {
+    display: none;
+  }
+  
+  .upload-group span {
+    margin-left: 10px;
+  }
+  
+  .add-skill {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .update-skills {
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .preview-section {
+    margin-top: 20px;
+  }
+  
+  .preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .preview-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .preview-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+  }
+  
