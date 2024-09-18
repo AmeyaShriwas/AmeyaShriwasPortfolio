@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Projects.css';
 import linkedin from './../../assets/linkedin.png';
 import amazon from './../../assets/amazon.png';
 import Slider from './../Slider/Slider'; // Adjust the path as necessary
+import m1 from './../../assets/m1.png';
+import m2 from './../../assets/m2.png';
+import m3 from './../../assets/m3.png';
 
+// Sample images for projects
 const projectsData = {
   htmlCssJs: [
     {
@@ -16,16 +20,6 @@ const projectsData = {
       description: "Built a weather application that fetches data from an API and displays real-time weather information using vanilla JavaScript.",
       image: amazon,
     },
-    {
-        title: "Personal Portfolio Website",
-        description: "Developed a personal portfolio using HTML, CSS, and JavaScript. It features responsive design and interactive components.",
-        image: linkedin,
-      },
-      {
-        title: "Weather Application",
-        description: "Built a weather application that fetches data from an API and displays real-time weather information using vanilla JavaScript.",
-        image: amazon,
-      },
   ],
   react: [
     {
@@ -38,28 +32,17 @@ const projectsData = {
       description: "Built a task management app using React, allowing users to add, edit, delete, and track tasks with a user-friendly interface.",
       image: amazon,
     },
-    // Add more React projects here
-    {
-      title: "Project 3",
-      description: "Description for Project 3.",
-      image: linkedin,
-    },
-    {
-      title: "Project 4",
-      description: "Description for Project 4.",
-      image: amazon,
-    },
   ],
   reactNative: [
     {
       title: "Social Media App",
       description: "Developed a social media app that allows users to post updates, photos, and videos using React Native and Firebase.",
-      image: linkedin,
+      images: [m1, m2, m3], // Multiple images for the project
     },
     {
       title: "Expense Tracker",
       description: "Created a cross-platform expense tracker app using React Native, with features like expense categories, budgeting, and analytics.",
-      image: amazon,
+      images: [m1, m2, m3], // Multiple images for the project
     },
   ],
   mern: [
@@ -77,10 +60,54 @@ const projectsData = {
 };
 
 const Projects = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Update window width for responsive design
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 768; // Check for screen size less than 768px
+
+  const renderImages = (images) => {
+    if (isMobile) {
+      // Show only one image on mobile with slider for remaining
+      return (
+        <div className="slider-wrapper">
+          <Slider>
+            {images.map((img, index) => (
+              <img key={index} src={img} alt={`Slide ${index}`} className="project-image" />
+            ))}
+          </Slider>
+        </div>
+      );
+    } else {
+      // Show 3 images by default and remaining in slider for larger screens
+      return (
+        <div>
+          <div className="project-images">
+            {images.slice(0, 3).map((img, index) => (
+              <img key={index} src={img} alt={`Image ${index}`} className="project-imageM" />
+            ))}
+          </div>
+          {images.length > 3 && (
+            <Slider>
+              {images.slice(3).map((img, index) => (
+                <img key={index} src={img} alt={`Slide ${index}`} className="project-imageM" />
+              ))}
+            </Slider>
+          )}
+        </div>
+      );
+    }
+  };
+
   return (
     <section id="projects" className="section">
       <h2>Projects</h2>
-      
+
       <div className="project-category">
         <h3>HTML, CSS, JavaScript Projects</h3>
         <div className="project-grid">
@@ -114,7 +141,7 @@ const Projects = () => {
             <div className="project" key={index}>
               <h4>{project.title}</h4>
               <p>{project.description}</p>
-              <img src={project.image} alt={project.title} className="project-image" />
+              {renderImages(project.images)} {/* Handle multiple images */}
             </div>
           ))}
         </div>
