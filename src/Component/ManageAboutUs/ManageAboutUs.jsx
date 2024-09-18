@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ManageAboutUs.css';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 export default function ManageAboutUs() {
   const [aboutContentLines, setAboutContentLines] = useState([
@@ -44,18 +45,16 @@ export default function ManageAboutUs() {
               onChange={(e) => handleLineChange(index, e.target.value)}
               className="text-field"
             />
-            <button
-              className="remove-button"
+            <AiOutlineDelete
+              className="delete-icon"
               onClick={() => handleRemoveLine(index)}
-              disabled={aboutContentLines.length <= 1}
-            >
-              Remove
-            </button>
+              style={{ cursor: 'pointer', color: 'red', marginLeft: '8px' }}
+            />
           </div>
         ))}
 
         <button className="add-button" onClick={handleAddLine}>
-          Add Line
+          Add More
         </button>
 
         <hr className="divider" />

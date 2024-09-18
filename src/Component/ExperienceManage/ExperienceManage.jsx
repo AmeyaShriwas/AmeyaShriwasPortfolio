@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './ExperienceManage.css'; // Import custom CSS file
+import { AiOutlineDelete } from 'react-icons/ai';
+
 
 export default function ExperienceManage() {
   const [experiences, setExperiences] = useState([
@@ -55,13 +57,11 @@ Built high-performance apps that improved the user engagement rate, and exceeded
                 onChange={(e) => handleExperienceChange(index, 'timeline', e.target.value)}
                 className="input-field"
               />
-              <button
-                className="remove-button"
-                onClick={() => handleRemoveExperience(index)}
-                disabled={experiences.length <= 1}
-              >
-                Remove
-              </button>
+                 <AiOutlineDelete
+              className="delete-icon"
+              onClick={() => handleRemoveLine(index)}
+              style={{ cursor: 'pointer', color: 'red', marginLeft: '8px' }}
+            />
             </div>
             <input
               type="text"

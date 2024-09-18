@@ -1,8 +1,7 @@
 /* General Styles */
 .manage-about-us {
-    padding: 20px;
+    padding: 10px;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     min-height: 100vh;
   }
   
@@ -16,9 +15,9 @@
   .content-container {
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 800px;
+    /* box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1); */
+    padding: 10px;
+    max-width: 100%;
     margin: 0 auto;
   }
   
@@ -26,6 +25,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    width: 100%;
   }
   
   .text-field {

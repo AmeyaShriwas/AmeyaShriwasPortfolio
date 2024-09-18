@@ -10,7 +10,8 @@
 /* Styling for the left side (Profile and Social Icons) */
 .portfolio-left {
     width: 25%;
-    padding: 20px;
+    min-width: 320px;
+    padding: 0px;
     background: #112d4a; /* Darker background for left side */
     color: #ffffff; /* Light text color */
     display: flex;
@@ -95,7 +96,7 @@
     .portfolio-container {
         flex-direction: column;
         height: auto;
-        padding: 0px;
+        padding: 0;
     }
 
     .portfolio-left, .portfolio-right {
@@ -105,7 +106,7 @@
 
     .tabs {
         flex-direction: column; /* Stack tabs vertically on small screens */
-        position: relative; /* Allow tabs to scroll with content on smaller screens */
+        position: static; /* Reset position on smaller screens */
         gap: 15px;
     }
 

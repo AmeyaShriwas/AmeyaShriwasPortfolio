@@ -13,10 +13,10 @@ const CustomButton = ({ children, onClick, type, style, ...props }) => (
       padding: '12px 16px',
       borderRadius: '4px',
       fontSize: '14px',
-      fontWeight: 'bold',
+    
       border: 'none',
       cursor: 'pointer',
-      width: 'auto',
+      width: '100%',
       marginTop: '16px',
       ...style,
     }}

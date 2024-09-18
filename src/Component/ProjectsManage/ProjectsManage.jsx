@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './ProjectsManage.css';
 
 export default function ProjectsManage() {
-  // State to manage projects in different categories
   const [projects, setProjects] = useState({
     htmlCssJs: [
       {
@@ -29,21 +28,18 @@ export default function ProjectsManage() {
 
   const [newCategory, setNewCategory] = useState('');
 
-  // Handle changes in project fields
   const handleProjectChange = (category, index, field, value) => {
     const updatedProjects = { ...projects };
     updatedProjects[category][index] = { ...updatedProjects[category][index], [field]: value };
     setProjects(updatedProjects);
   };
 
-  // Add a new project to a specific category
   const handleAddProject = (category) => {
     const updatedProjects = { ...projects };
     updatedProjects[category].push({ title: '', description: '', images: [] });
     setProjects(updatedProjects);
   };
 
-  // Remove a project from a specific category
   const handleRemoveProject = (category, index) => {
     const updatedProjects = { ...projects };
     if (updatedProjects[category].length > 1) {
@@ -52,7 +48,6 @@ export default function ProjectsManage() {
     }
   };
 
-  // Handle image uploads
   const handleImageUpload = (category, index, event) => {
     const files = Array.from(event.target.files);
     const updatedProjects = { ...projects };
@@ -61,12 +56,10 @@ export default function ProjectsManage() {
     setProjects(updatedProjects);
   };
 
-  // Update projects data (for saving to a database or processing)
   const handleUpdateContent = () => {
     console.log('Updated Projects Content:', projects);
   };
 
-  // Add a new category for projects
   const handleAddCategory = () => {
     if (newCategory && !projects[newCategory]) {
       setProjects({ ...projects, [newCategory]: [] });

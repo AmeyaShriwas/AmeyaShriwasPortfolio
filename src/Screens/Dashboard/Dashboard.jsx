@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import './Dashboard.css'; // Custom CSS file for styles
-// import { useNavigate } from 'react-router-dom'; // For logout navigation
+import './Dashboard.css';
 import ManageAboutUs from '../../Component/ManageAboutUs/ManageAboutUs';
 import ProjectsManage from '../../Component/ProjectsManage/ProjectsManage';
 import ExperienceManage from '../../Component/ExperienceManage/ExperienceManage';
 import ManageSkills from '../../Component/SkillsManage/SkillsManage';
 import { useNavigate } from 'react-router-dom';
 
-// Define custom navigation structure
 const NAVIGATION = [
   { segment: 'about', title: 'About Us', icon: '🏢' },
   { segment: 'experience', title: 'Experience', icon: '💼' },
@@ -15,7 +13,6 @@ const NAVIGATION = [
   { segment: 'skills', title: 'Skills', icon: '🧠' },
 ];
 
-// Tab Panel Component
 function TabPanel({ children, value, index }) {
   return (
     <div
@@ -29,10 +26,9 @@ function TabPanel({ children, value, index }) {
   );
 }
 
-// Dashboard Tabs Component
 function DashboardTabs() {
   const [value, setValue] = useState(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -67,7 +63,6 @@ function DashboardTabs() {
   );
 }
 
-// Top-right Bar Component
 function TopRightBar() {
   const navigate = useNavigate();
 
@@ -77,39 +72,27 @@ function TopRightBar() {
 
   return (
     <div className="top-right-bar">
+        <button className="logout-button" onClick={handleLogout}>
+      Ameya Shriwas
+      </button>
+      <div className='logoutButtonContainer'>
       <div className="blinking-icon"></div>
+
       <button className="logout-button" onClick={handleLogout}>
         Logout
       </button>
-    </div>
-  );
-}
-
-// Dashboard Component
-export default function Dashboard() {
-  return (
-    <div className="dashboard">
-      <div className="main-content">
-        <TopRightBar />
-        <DashboardTabs />
       </div>
     </div>
   );
 }
 
-// Dummy components for demonstration
-function ManageAboutUsFun() {
-  return <div>Manage About Us</div>;
-}
-
-function ExperienceManageFun() {
-  return <div>Experience Manage</div>;
-}
-
-function ProjectsManageFun() {
-  return <div>Projects Manage</div>;
-}
-
-function ManageSkillsFun() {
-  return <div>Manage Skills</div>;
+export default function Dashboard() {
+  return (
+    <div className="dashboard">
+      <TopRightBar />
+      <div className="main-content">
+        <DashboardTabs />
+      </div>
+    </div>
+  );
 }

@@ -1,114 +1,135 @@
+/* General Container Styling */
 .experience-manage-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-  }
-  
-  .title {
-    text-align: center;
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .experience-form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .experience-item {
-    margin-bottom: 20px;
-  }
-  
-  .experience-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .input-field, .textarea-field {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-  }
-  
-  .textarea-field {
-    height: 100px;
-  }
-  
-  .remove-button {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .add-button, .update-button {
-    background-color: #2196f3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-  }
-  
-  .update-button {
-    background-color: #4caf50;
-  }
-  
-  .add-button:hover, .update-button:hover {
-    opacity: 0.9;
-  }
-  
-  .divider {
-    border: 0;
-    border-top: 1px solid #ddd;
-    margin: 10px 0;
-  }
-  
-  .preview-section {
-    margin-top: 40px;
-  }
-  
-  .preview-title {
-    color: #333;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .experience-preview {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 3px 6px rgba(0,0,0,0.05);
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .experience-preview-item {
-    margin-bottom: 20px;
-  }
-  
-  .position-preview {
-    font-weight: bold;
-  }
-  
-  .timeline-preview {
-    color: #555;
-  }
-  
-  .content-preview {
-    white-space: pre-line;
-  }
-  
+  padding: px; /* Increased padding for better spacing */
+  min-height: 100vh;
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* Title Styling */
+.title {
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 30px; /* Increased margin for better separation */
+}
+
+/* Experience Form Styling */
+.experience-form {
+  background-color: #fff;
+  padding: 10px; /* Increased padding for better spacing */
+  border-radius: 10px; /* Slightly rounded corners */
+  max-width: 100%; /* Set max-width for centering on large screens */
+  margin: 0 auto; /* Center form horizontally */
+}
+
+/* Experience Item Styling */
+.experience-item {
+  margin-bottom: 30px; /* Reduced margin for tighter spacing */
+  padding: 10px; /* Increased padding for better content spacing */
+  border-radius: 10px; /* Consistent border radius */
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); /* Softer shadow */
+  background-color: #f9f9f9; /* Slightly different background color for distinction */
+ 
+}
+
+/* Header Styling within Experience Item */
+.experience-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px; /* Spacing between header and input fields */
+}
+
+/* Input and Textarea Styling */
+.input-field, .textarea-field {
+  width: 100%; /* Full width minus padding */
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px; /* Increased margin for better spacing */
+  box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+.textarea-field {
+  height: 200px; /* Increased height for better content visibility */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Button Styling */
+.add-button, .update-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 20px; /* Slightly larger padding for buttons */
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px; /* Increased margin for spacing */
+}
+
+.update-button {
+  background-color: #4caf50;
+}
+
+.add-button:hover, .update-button:hover {
+  opacity: 0.9;
+}
+
+/* Delete Icon Styling */
+.delete-icon {
+  cursor: pointer;
+  color: #f44336; /* Consistent color with remove button */
+  font-size: 20px; /* Larger icon for better visibility */
+}
+
+/* Divider Styling */
+.divider {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 20px 0; /* Increased margin for spacing */
+}
+
+/* Preview Section Styling */
+.preview-section {
+  margin-top: 50px; /* Increased margin for better separation */
+}
+
+/* Preview Title Styling */
+.preview-title {
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20px; /* Increased margin for better separation */
+}
+
+/* Experience Preview Styling */
+.experience-preview {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  max-width: 800px; /* Set max-width for centering on large screens */
+  margin: 0 auto; /* Center preview horizontally */
+}
+
+/* Experience Preview Item Styling */
+.experience-preview-item {
+  margin-bottom: 30px; /* Increased margin for better separation */
+}
+
+/* Position and Timeline Preview Styling */
+.position-preview {
+  font-weight: bold;
+  font-size: 18px; /* Slightly larger font size for better readability */
+}
+
+.timeline-preview {
+  color: #555;
+  font-size: 16px; /* Slightly larger font size for better readability */
+}
+
+/* Content Preview Styling */
+.content-preview {
+  white-space: pre-line;
+  line-height: 1.6; /* Increased line height for readability */
+}
