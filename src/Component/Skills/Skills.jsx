@@ -9,7 +9,7 @@ const Skills = () => {
   return (
     <section id="skills" className="section">
       <h2>Skills</h2>
-      <div className="skills-container">
+      <div className="skills-containerMain">
         <div className="skill"><FaHtml5 className="skill-icon" /><h4>HTML5</h4></div>
         <div className="skill"><FaCss3Alt className="skill-icon" /><h4>CSS3</h4></div>
         <div className="skill"><FaJs className="skill-icon" /><h4>JavaScript</h4></div>

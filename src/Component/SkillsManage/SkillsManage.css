@@ -11,7 +11,7 @@
 
 h1 {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   margin-bottom: 20px;
   color: #333;
 }
@@ -83,7 +83,7 @@ input[type="file"] {
 }
 
 .add-btn {
-  background-color: #28a745;
+  background-color: #112d4a;
   color: white;
   padding: 8px 16px;
   border-radius: 4px;
@@ -96,7 +96,7 @@ input[type="file"] {
 .update-btn {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #112d4a;
   color: white;
   border-radius: 5px;
   border: none;

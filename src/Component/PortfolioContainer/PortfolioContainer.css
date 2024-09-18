@@ -41,7 +41,7 @@
 }
 
 /* Tabs for section navigation */
-.tabs {
+.tabsMain {
     display: flex;
     flex-wrap: nowrap; /* Prevent wrapping of tabs */
     margin-bottom: 20px; /* Spacing below tabs */
@@ -101,7 +101,7 @@
         padding: 10px;
     }
 
-    .tabs {
+    .tabsMain {
         flex-direction: column; /* Stack tabs vertically on small screens */
         position: static; /* Reset position on smaller screens */
         gap: 15px;

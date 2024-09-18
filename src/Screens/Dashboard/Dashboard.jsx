@@ -47,6 +47,7 @@ function DashboardTabs() {
           </button>
         ))}
       </div>
+      <div className='dashboardManageComponents'>
       <TabPanel value={value} index={0}>
         <ManageAboutUs />
       </TabPanel>
@@ -59,6 +60,7 @@ function DashboardTabs() {
       <TabPanel value={value} index={3}>
         <ManageSkills />
       </TabPanel>
+      </div>
     </div>
   );
 }

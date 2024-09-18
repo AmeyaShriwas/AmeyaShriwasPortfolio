@@ -32,7 +32,7 @@ const PortfolioContainer = () => {
                 <SocialIcons />
             </div>
             <div className="portfolio-right">
-                <div className="tabs">
+                <div className="tabsMain">
                     <button 
                         className={`tab ${activeTab === 'about' ? 'active' : ''}`} 
                         onClick={() => setActiveTab('about')}

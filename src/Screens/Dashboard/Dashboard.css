@@ -15,13 +15,38 @@
 /* Tabs Styles */
 .dashboard-tabs {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .tabs {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  /* justify-content: space-around; */
   border-bottom: 1px solid #ccc;
+  gap: 2rem;
+  min-width: 320px;
+  height: 100vh;
+  
+}
+.dashboardManageComponents{
+   width: 100%;
+}
+
+@media  screen and (max-width: 768px) {
+  .dashboard-tabs {
+    display: flex;
+    flex-direction: column;
+  }
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    border-bottom: 1px solid #ccc;
+    gap: 2rem;
+    min-width: 320px;
+    height: auto;
+    
+  }
 }
 
 .tab {
@@ -31,6 +56,7 @@
   background: none;
   cursor: pointer;
   text-align: center;
+  max-height: 50px;
 }
 
 .tab.active {

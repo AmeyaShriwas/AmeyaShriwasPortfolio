@@ -3,12 +3,12 @@
   }
   
   h2 {
-    font-size: 2rem;
+    font-size: 1.2rem;
     margin-bottom: 20px;
     text-align: center;
   }
   
-  .skills-container {
+  .skills-containerMain {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
