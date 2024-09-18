@@ -8,7 +8,7 @@ const CustomButton = ({ children, onClick, type, style, ...props }) => (
     onClick={onClick}
     type={type}
     style={{
-      backgroundColor: '#1976d2',
+      backgroundColor: '#112d4a',
       color: '#fff',
       padding: '12px 16px',
       borderRadius: '4px',
@@ -18,6 +18,7 @@ const CustomButton = ({ children, onClick, type, style, ...props }) => (
       cursor: 'pointer',
       width: '100%',
       marginTop: '16px',
+      marginBottom: '10px',
       ...style,
     }}
     {...props}

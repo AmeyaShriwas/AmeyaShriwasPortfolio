@@ -3,6 +3,9 @@
     padding: 20px;
     max-width: 800px;
     margin: auto;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
   }
   
   .profile-image {
@@ -17,7 +20,7 @@
     font-size: 2em;
     margin: 10px 0;
     animation: fadeIn 2s;
-    color: white;
+    color: rgb(0, 0, 0);
   }
   
   .subtitle {
@@ -34,7 +37,10 @@
     margin: 10px 0;
     font-size: 1em;
     display: flex;
-    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: black;
   }
   
   .social-icons {
@@ -52,7 +58,7 @@
     display: inline-block;
     padding: 10px 20px;
     margin-top: 20px;
-    background-color: #007bff;
+    background-color: #112d4a;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -80,7 +86,7 @@
 }
 
 .social-icon.github {
-    color: #ffffff;
+    color: #302e2e;
 }
 
 .social-icon.twitter {

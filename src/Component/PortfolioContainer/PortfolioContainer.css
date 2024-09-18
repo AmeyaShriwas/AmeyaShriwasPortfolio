@@ -12,7 +12,7 @@
     width: 25%;
     min-width: 320px;
     padding: 0px;
-    background: #112d4a; /* Darker background for left side */
+    background: #ffffff; /* Darker background for left side */
     color: #ffffff; /* Light text color */
     display: flex;
     flex-direction: column; /* Stack items vertically */
@@ -23,9 +23,6 @@
     transition: background 0.3s ease; /* Smooth background transition */
 }
 
-.portfolio-left:hover {
-    background: #0d1a2b; /* Slightly darker background on hover */
-}
 
 /* Styling for the right side (Tab content) */
 .portfolio-right {

@@ -15,17 +15,18 @@ const Profile = () => {
         <p><FaEnvelope /> ameyashriwas133@example.com</p>
       </div>
       <div className="social-icons">
-        <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer" className="social-icon linkedin">
+        <a href="https://www.linkedin.com/in/ameya-shriwas-aab7b8248/" target="_blank" rel="noopener noreferrer" className="social-icon linkedin">
           <FaLinkedin />
         </a>
-        <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" className="social-icon github">
+        <a href="https://github.com/AmeyaShriwas" target="_blank" rel="noopener noreferrer" className="social-icon github">
           <FaGithub />
         </a>
-        <a href="https://twitter.com/your-username" target="_blank" rel="noopener noreferrer" className="social-icon twitter">
+        <a href="https://x.com/ShriwasAmeya" target="_blank" rel="noopener noreferrer" className="social-icon twitter">
           <FaTwitter />
         </a>
       </div>
-      <a href="/path/to/your/cv.pdf" download className="download-cv-button">Download CV</a>
+      <a href="https://drive.google.com/file/d/1E8rWjATajhd_gV01Z-M2ht-TBM-HfMSN/view?usp=sharing" target="_blank" className="download-cv-button">Download CV</a>
+
       <Drawer/>
     </div>
   );
