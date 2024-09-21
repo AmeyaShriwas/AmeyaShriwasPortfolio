@@ -1,31 +1,40 @@
-// About.jsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './About.css';
+import BASE_URL from '../../Api';
+import axios from 'axios';  // Ensure axios is imported
 
 const About = () => {
+  const [aboutContentLines, setAboutContentLines] = useState([]);
+
+  // Fetch About Us content on component mount
+  useEffect(() => {
+    axios.get(`${BASE_URL}/admin/getAboutUs`, )
+      .then(response => {
+        console.log('res[', response)
+        if (response.status === 200 && response.data?.data[0]?.aboutUsDetail.length > 0) {
+          setAboutContentLines(response.data.data[0].aboutUsDetail); // Set the fetched data
+        } else {
+          setAboutContentLines(['No content found']); // Default message if no content exists
+        }
+      })
+      .catch(error => {
+        setAboutContentLines(['No content found']); // Default message when there's an error fetching data
+        console.log('Error fetching About Us content:', error);
+      });
+  }, []);
+
   return (
     <section id="about" className="section">
       <h2>About</h2>
-      <p>
-        Hello! I'm Ameya Shriwas, a senior developer specializing in the MERN Stack (MongoDB, Express, React, Node.js), 
-        React Native for mobile applications, and server-side technologies. I have experience deploying apps on VPS and 
-        ensuring scalable solutions.
-      </p>
-      <p>
-        I have extensive experience in React Native app building, enabling me to craft cross-platform mobile applications 
-        that deliver seamless user experiences. My proficiency with server management helps me optimize application performance.
-      </p>
-      <p>
-        Along with development, I also have a deep interest in digital marketing, focusing on SEO to boost website 
-        visibility and reach. I’m passionate about helping businesses grow by leveraging technology.
-      </p>
-      <p>
-        With a solid foundation in both frontend and backend technologies, I thrive on creating solutions that not only 
-        meet business requirements but also deliver outstanding user experiences.
-      </p>
-      <p>
-        In my free time, I contribute to open-source projects, mentor aspiring developers, and stay updated with industry trends.
-      </p>
+      {aboutContentLines.length > 0 ? (
+        aboutContentLines.map((line, index) => (
+          <p key={index}>
+            {line}
+          </p>
+        ))
+      ) : (
+        <p>No content found</p> // Show if there's no content
+      )}
     </section>
   );
 };

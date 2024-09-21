@@ -3,6 +3,7 @@ import logo from '../../assets/portfolio.png';
 import './Profile.css';
 import { FaPhone, FaEnvelope, FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 import Drawer from '../Sidebar/Sidebar';
+import SidebarDrawer from '../Sidebar/Sidebar';
 
 const Profile = () => {
   return (
@@ -27,7 +28,7 @@ const Profile = () => {
       </div>
       <a href="https://drive.google.com/file/d/1E8rWjATajhd_gV01Z-M2ht-TBM-HfMSN/view?usp=sharing" target="_blank" className="download-cv-button">Download CV</a>
 
-      <Drawer/>
+      <SidebarDrawer/>
     </div>
   );
 };

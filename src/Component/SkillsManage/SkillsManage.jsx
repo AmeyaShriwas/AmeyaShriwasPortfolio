@@ -1,23 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './SkillsManage.css';
+import BASE_URL from '../../Api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ManageSkills() {
-  // State to hold the list of skills
-  const [skills, setSkills] = useState([
-    { name: 'React', icon: null },
-    { name: 'Node.js', icon: null },
-  ]);
+  const [skills, setSkills] = useState([]); // Start with an empty array
 
-  // Handle skill name and icon change
-  const handleSkillChange = (index, field, value) => {
+  // Fetch skills from the API on component mount
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        // Get token from localStorage
+        const token = localStorage.getItem('token');
+
+        // Fetch skills data from the API
+        const response = await axios.get(`${BASE_URL}/admin/skills/getSkills`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        // Set skills data from the response
+        console.log('skill get', response?.data?.data[0].skillsDetail)
+        setSkills(response?.data?.data[0].skillsDetail || []);  // Ensure it falls back to an empty array if no data
+      } catch (error) {
+        console.error('Error fetching skills:', error);
+      }
+    };
+
+    fetchSkills(); // Call the function to fetch skills when component mounts
+  }, []); // Empty dependency array to run useEffect only once on mount
+
+  // Handle skill name change
+  const handleSkillChange = (index, value) => {
     const updatedSkills = [...skills];
-    updatedSkills[index] = { ...updatedSkills[index], [field]: value };
+    updatedSkills[index] = value;
     setSkills(updatedSkills);
   };
 
   // Handle adding a new skill
   const handleAddSkill = () => {
-    setSkills([...skills, { name: '', icon: null }]);
+    setSkills([...skills, '']);
   };
 
   // Handle removing a skill
@@ -26,9 +52,31 @@ export default function ManageSkills() {
     setSkills(updatedSkills);
   };
 
-  // Handle the update (e.g., saving to a database or performing other actions)
-  const handleUpdateSkills = () => {
-    console.log('Updated Skills:', skills);
+  // Handle API call to update skills
+  const handleUpdateSkills = async () => {
+    try {
+      // Get token from localStorage
+      const token = localStorage.getItem('token');
+
+      // Make the API request to update skills
+      const response = await axios.post(
+        `${BASE_URL}/admin/skills/add`,
+        { skillsDetail: skills },  // Sending skills as an array of strings
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      // Handle success
+      toast.success('Skills added successfully');
+      console.log('Skills updated successfully:', response.data);
+    } catch (error) {
+      // Handle errors
+      console.error('Error updating skills:', error);
+    }
   };
 
   return (
@@ -39,50 +87,42 @@ export default function ManageSkills() {
         {/* Display Skills */}
         {skills.map((skill, index) => (
           <div key={index} className="skill-card">
-            <div className="skill-details">
-              <input
-                type="text"
-                placeholder={`Skill ${index + 1}`}
-                value={skill.name}
-                onChange={(e) => handleSkillChange(index, 'name', e.target.value)}
-                className="skill-input"
-              />
-
-              <label htmlFor={`icon-upload-${index}`} className="upload-label">
-                <span className="upload-icon">📁</span> 
-              </label>
-              <input
-                type="file"
-                id={`icon-upload-${index}`}
-                accept="image/*"
-                onChange={(e) => handleSkillChange(index, 'icon', e.target.files[0])}
-              />
-              {skill.icon && <span className="icon-name">{skill.icon.name}</span>}
-            </div>
-
-            <button className="remove-btn" onClick={() => handleRemoveSkill(index)} disabled={skills.length <= 1}>
+            <input
+              type="text"
+              placeholder={`Skill ${index + 1}`}
+              value={skill}
+              onChange={(e) => handleSkillChange(index, e.target.value)}
+              className="skill-input"
+            />
+            <button
+              className="remove-btn"
+              onClick={() => handleRemoveSkill(index)}
+              disabled={skills.length <= 1}
+            >
               ✖
             </button>
           </div>
         ))}
-        <button className="add-btn" onClick={handleAddSkill}>
-          + Add Skill
-        </button>
-      </div>
+        <div className='skillbuttoncontainer'>
+          <button className="update-btn" onClick={handleAddSkill}>
+            + Add Skill
+          </button>
 
-      <button className="update-btn" onClick={handleUpdateSkills}>
-        Update Skills
-      </button>
+          <button className="update-btn" onClick={handleUpdateSkills}>
+            Update Skills
+          </button>
+        </div>
+      </div>
 
       <div className="preview-section">
         <h2>Preview</h2>
         <div className="preview-container">
           {skills.map((skill, index) => (
             <div key={index} className="preview-item">
-              <span>{skill.name}</span>
-              {skill.icon && <img src={URL.createObjectURL(skill.icon)} alt={skill.name} />}
+              <span>{skill}</span>
             </div>
           ))}
+          <ToastContainer/>
         </div>
       </div>
     </div>

@@ -1,25 +1,15 @@
 import React, { useState } from 'react';
 import './ExperienceManage.css'; // Import custom CSS file
 import { AiOutlineDelete } from 'react-icons/ai';
+import axios from 'axios';
+import BASE_URL from '../../Api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 
 export default function ExperienceManage() {
-  const [experiences, setExperiences] = useState([
-    {
-      timeline: 'January 2015 - Present',
-      position: 'Senior Full Stack Developer at Tech Solutions',
-      content: `I lead a team of developers to design, build, and deploy scalable web applications using the MERN stack. I’ve successfully launched multiple projects from concept to production, improving both performance and customer satisfaction.
-
-My experience includes managing server infrastructure, including VPS hosting, optimizing for performance, security, and scalability. I've also led efforts to integrate React Native mobile apps into our technology stack.`,
-    },
-    {
-      timeline: 'June 2012 - December 2014',
-      position: 'React Native Developer at Mobile Innovations',
-      content: `Developed cross-platform mobile applications using React Native. Worked on integrating features such as real-time notifications, push notifications, and seamless UI transitions for both Android and iOS platforms.
-
-Built high-performance apps that improved the user engagement rate, and exceeded expectations by reducing app load times and increasing responsiveness. Successfully launched apps that garnered significant user downloads.`,
-    },
-  ]);
+  const [experiences, setExperiences] = useState([]);
 
   const handleExperienceChange = (index, field, value) => {
     const updatedExperiences = [...experiences];
@@ -39,8 +29,48 @@ Built high-performance apps that improved the user engagement rate, and exceeded
   };
 
   const handleUpdateContent = () => {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+
+    axios.post(`${BASE_URL}/admin/addExperience`, {ExperienceDetail: experiences}, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Send token in Authorization header
+      },
+    })
+    .then(response => {
+      console.log('res sta',response.status)
+      if (response.status === 200) {
+        toast.success('Experience content updated successfully');
+        console.log('Experience content updated successfully.');
+      }
+    })
+    .catch(error => {
+      toast.error('Error updating Experience content');
+      console.log('Error updating Experience content:', error);
+    });
     console.log('Updated Experience Content:', experiences);
   };
+
+
+  // Fetch About Us content on component mount
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Get the token from local storage
+    axios.get(`${BASE_URL}/admin/getExperience`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Send token in Authorization header
+      },
+    })
+    .then(response => {
+      if (response.status === 200 && response.data?.data[0]?.ExperienceDetail.length > 0) {
+        setExperiences(response.data.data[0].ExperienceDetail); // Set the fetched data
+      } else {
+        
+      }
+    })
+    .catch(error => {
+      setExperiences(['No content yet']); // Default message when there's an error fetching data
+      console.log('Error fetching About Us content:', error);
+    });
+  }, []);
 
   return (
     <div className="experience-manage-container">
@@ -59,7 +89,7 @@ Built high-performance apps that improved the user engagement rate, and exceeded
               />
                  <AiOutlineDelete
               className="delete-icon"
-              onClick={() => handleRemoveLine(index)}
+              onClick={() => handleRemoveExperience(index)}
               style={{ cursor: 'pointer', color: 'red', marginLeft: '8px' }}
             />
             </div>
@@ -99,6 +129,7 @@ Built high-performance apps that improved the user engagement rate, and exceeded
               <p className="content-preview">{exp.content}</p>
             </div>
           ))}
+           <ToastContainer />
         </div>
       </div>
     </div>

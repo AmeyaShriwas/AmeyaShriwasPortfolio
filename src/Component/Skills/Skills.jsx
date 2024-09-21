@@ -1,30 +1,46 @@
-// Skills.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Skills.css';
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase, FaServer } from 'react-icons/fa';
-// import { SiMongodb, SiMysql, SiNextdotjs, SiBootstrap, SiTailwindcss, SiMaterialui } from 'react-icons/si';
-import { FaGoogle } from 'react-icons/fa';
+import axios from 'axios';
+import BASE_URL from '../../Api'; // Ensure BASE_URL is properly set
 
 const Skills = () => {
+  const [skills, setSkills] = useState([]); // Start with an empty array
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      try {
+        // Get token from localStorage
+        const token = localStorage.getItem('token');
+
+        // Fetch skills data from the API
+        const response = await axios.get(`${BASE_URL}/admin/skills/getSkills`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        // Log and set the skills data from the response
+        console.log('Skill fetched:', response?.data?.data[0].skillsDetail);
+        setSkills(response?.data?.data[0].skillsDetail || []); // Fallback to an empty array if no data
+      } catch (error) {
+        console.error('Error fetching skills:', error);
+      }
+    };
+
+    fetchSkills(); // Call the function to fetch skills when component mounts
+  }, []); // Empty dependency array to run useEffect only once on mount
+
   return (
     <section id="skills" className="section">
       <h2>Skills</h2>
       <div className="skills-containerMain">
-        <div className="skill"><FaHtml5 className="skill-icon" /><h4>HTML5</h4></div>
-        <div className="skill"><FaCss3Alt className="skill-icon" /><h4>CSS3</h4></div>
-        <div className="skill"><FaJs className="skill-icon" /><h4>JavaScript</h4></div>
-        <div className="skill"><FaReact className="skill-icon" /><h4>React</h4></div>
-        <div className="skill"><FaReact className="skill-icon" /><h4>React Native</h4></div>
-        <div className="skill"><FaNodeJs className="skill-icon" /><h4>Node.js</h4></div>
-        <div className="skill"><FaNodeJs className="skill-icon" /><h4>Express.js</h4></div>
-        {/* <div className="skill"><SiMongodb className="skill-icon" /><h4>MongoDB</h4></div>
-        <div className="skill"><SiMysql className="skill-icon" /><h4>MySQL</h4></div>
-        <div className="skill"><FaServer className="skill-icon" /><h4>VPS</h4></div>
-        <div className="skill"><FaGoogle className="skill-icon" /><h4>SEO</h4></div>
-        <div className="skill"><SiNextdotjs className="skill-icon" /><h4>Next.js</h4></div>
-        <div className="skill"><SiBootstrap className="skill-icon" /><h4>Bootstrap</h4></div>
-        <div className="skill"><SiTailwindcss className="skill-icon" /><h4>Tailwind CSS</h4></div>
-        <div className="skill"><SiMaterialui className="skill-icon" /><h4>Material UI</h4></div> */}
+        {/* Map through the skills and render them */}
+        {skills?.map((skill, index) => (
+          <div key={index} className="skill">
+            <h4>{skill}</h4>
+          </div>
+        ))}
       </div>
     </section>
   );

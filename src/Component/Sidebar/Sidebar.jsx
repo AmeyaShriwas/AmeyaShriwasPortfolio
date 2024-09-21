@@ -1,9 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Import axios
+import BASE_URL from '../../Api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 // Custom Components
-const CustomButton = ({ children, onClick, type, style, ...props }) => (
+const CustomButton = ({ children, onClick, type, loading, style, ...props }) => (
   <button
     onClick={onClick}
     type={type}
@@ -13,17 +17,18 @@ const CustomButton = ({ children, onClick, type, style, ...props }) => (
       padding: '12px 16px',
       borderRadius: '4px',
       fontSize: '14px',
-    
       border: 'none',
-      cursor: 'pointer',
+      cursor: loading ? 'not-allowed' : 'pointer',
       width: '100%',
       marginTop: '16px',
       marginBottom: '10px',
+      opacity: loading ? 0.6 : 1,
       ...style,
     }}
+    disabled={loading}
     {...props}
   >
-    {children}
+    {loading ? 'Loading...' : children}
   </button>
 );
 
@@ -84,18 +89,7 @@ const CustomAvatar = ({ alt, style, ...props }) => (
   </div>
 );
 
-const CustomDivider = ({ style, ...props }) => (
-  <hr
-    style={{
-      border: 'none',
-      borderBottom: '1px solid #ddd',
-      marginTop: '16px',
-      width: '100%',
-      ...style,
-    }}
-    {...props}
-  />
-);
+
 
 const CustomIconButton = ({ onClick, style, children, ...props }) => (
   <button
@@ -114,6 +108,19 @@ const CustomIconButton = ({ onClick, style, children, ...props }) => (
   >
     {children}
   </button>
+);
+
+const CustomDivider = ({ style, ...props }) => (
+  <hr
+    style={{
+      border: 'none',
+      borderBottom: '1px solid #ddd',
+      marginTop: '16px',
+      width: '100%',
+      ...style,
+    }}
+    {...props}
+  />
 );
 
 const CustomDrawer = ({ open, onClose, children }) => (
@@ -150,8 +157,7 @@ const CustomDrawer = ({ open, onClose, children }) => (
   </div>
 );
 
-// SidebarDrawer Component
-export default function SidebarDrawer() {
+const SidebarDrawer = () => {
   const [open, setOpen] = React.useState(false);
   const [view, setView] = React.useState('login');
   const [email, setEmail] = React.useState('');
@@ -159,8 +165,11 @@ export default function SidebarDrawer() {
   const [otp, setOtp] = React.useState('');
   const [newPassword, setNewPassword] = React.useState('');
   const [emailSent, setEmailSent] = React.useState(false);
-//   const navigate = useNavigate();
-const navigate = useNavigate()
+  const [isLoginLoading, setIsLoginLoading] = React.useState(false);
+  const [isForgotPasswordLoading, setIsForgotPasswordLoading] = React.useState(false);
+  const [isVerifyOtpLoading, setIsVerifyOtpLoading] = React.useState(false);
+  const [isResetPasswordLoading, setIsResetPasswordLoading] = React.useState(false);
+  const navigate = useNavigate();
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -168,103 +177,91 @@ const navigate = useNavigate()
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    setIsLoginLoading(true); // Start loading
     try {
-        navigate('/dashboard');
-      const response = await fetch('http://yourapi.com/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+      const response = await axios.post(`${BASE_URL}/login`, {
+        email: email,
+        password: password,
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log(result);
+      if (response.status === 200) {
+        localStorage.setItem('token', response?.data?.token);
+        toast.success('Login Successfully');
         navigate('/dashboard');
       } else {
-        console.error('Login failed');
+        toast.error('Invalid Credentials');
       }
     } catch (error) {
-      console.error('Error occurred during login:', error);
+      toast.error('Something went wrong');
+    } finally {
+      setIsLoginLoading(false); // Stop loading
     }
   };
 
   const handleForgotPasswordSubmit = async (e) => {
     e.preventDefault();
+    setIsForgotPasswordLoading(true); // Start loading
     try {
-        setEmailSent(true);
-      const response = await fetch('http://yourapi.com/forgot-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
+      const response = await axios.post(`${BASE_URL}/forgot-password`, {
+        email,
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         setEmailSent(true);
-        console.log('OTP sent to email');
+        toast.success('OTP sent to email');
       } else {
-        console.error('Failed to send OTP');
+        toast.error('Failed to send OTP');
       }
     } catch (error) {
-      console.error('Error occurred during forgot password:', error);
+      toast.error('Failed to send OTP');
+    } finally {
+      setIsForgotPasswordLoading(false); // Stop loading
     }
   };
 
   const handleVerifyOtpSubmit = async (e) => {
     e.preventDefault();
+    setIsVerifyOtpLoading(true); // Start loading
     try {
-        setView('resetPassword');
-      const response = await fetch('http://yourapi.com/verify-otp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, otp }),
+      const response = await axios.post(`${BASE_URL}/verify-otp`, {
+        email,
+        otp,
       });
 
-      if (response.ok) {
-        console.log('OTP verified');
+      if (response.status === 200) {
+        toast.success('OTP verified');
         setView('resetPassword');
       } else {
-        console.error('OTP verification failed');
+        toast.error('OTP verification failed');
       }
     } catch (error) {
-      console.error('Error occurred during OTP verification:', error);
+      toast.error('OTP verification failed');
+    } finally {
+      setIsVerifyOtpLoading(false); // Stop loading
     }
   };
 
   const handleResetPasswordSubmit = async (e) => {
     e.preventDefault();
+    setIsResetPasswordLoading(true); // Start loading
     try {
-        setView('login');
-      const response = await fetch('http://yourapi.com/reset-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, newPassword }),
+      const response = await axios.post(`${BASE_URL}/reset-password`, {
+        email,
+        otp,
+        newPassword,
       });
 
-      if (response.ok) {
-        console.log('Password updated');
+      if (response.status === 200) {
+        toast.success('Password updated');
         setView('login');
       } else {
-        console.error('Password update failed');
+        toast.error('Password update failed');
       }
     } catch (error) {
-      console.error('Error occurred during password reset:', error);
+      toast.error('Password update failed');
+    } finally {
+      setIsResetPasswordLoading(false); // Stop loading
     }
-  };
-
-  const handleLogout = () => {
-    console.log('Logged out');
-    navigate('/login');
   };
 
   const renderContent = () => {
@@ -290,7 +287,9 @@ const navigate = useNavigate()
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <CustomButton type="submit">Login</CustomButton>
+              <CustomButton type="submit" loading={isLoginLoading}>
+                Login
+              </CustomButton>
               <CustomTypography
                 variant="body2"
                 onClick={() => setView('forgotPassword')}
@@ -303,7 +302,7 @@ const navigate = useNavigate()
       case 'forgotPassword':
         return (
           <>
-              <CustomAvatar alt="A" />
+            <CustomAvatar alt="A" />
             <CustomTypography variant="h5">
               {emailSent ? 'Enter OTP' : 'Forgot Password'}
             </CustomTypography>
@@ -318,7 +317,9 @@ const navigate = useNavigate()
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <CustomButton type="submit">Submit</CustomButton>
+                <CustomButton type="submit" loading={isForgotPasswordLoading}>
+                  Submit
+                </CustomButton>
                 <CustomTypography
                   variant="body2"
                   onClick={() => setView('login')}
@@ -331,20 +332,15 @@ const navigate = useNavigate()
                 style={{ width: '100%', display: 'flex', flexDirection: 'column' }}
                 onSubmit={handleVerifyOtpSubmit}
               >
-                
                 <CustomTextField
                   label="Enter OTP"
                   type="text"
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                 />
-                <CustomButton type="submit">Verify OTP</CustomButton>
-                <CustomTypography
-                  variant="body2"
-                  onClick={() => setView('login')}
-                >
-                  Back to Login
-                </CustomTypography>
+                <CustomButton type="submit" loading={isVerifyOtpLoading}>
+                  Submit
+                </CustomButton>
               </form>
             )}
           </>
@@ -352,25 +348,21 @@ const navigate = useNavigate()
       case 'resetPassword':
         return (
           <>
+            <CustomAvatar alt="A" />
             <CustomTypography variant="h5">Reset Password</CustomTypography>
             <form
               style={{ width: '100%', display: 'flex', flexDirection: 'column' }}
               onSubmit={handleResetPasswordSubmit}
             >
-                    <CustomAvatar alt="A" />
               <CustomTextField
-                label="New Password"
+                label="Enter New Password"
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
-              <CustomButton type="submit">Update Password</CustomButton>
-              <CustomTypography
-                variant="body2"
-                onClick={() => setView('login')}
-              >
-                Back to Login
-              </CustomTypography>
+              <CustomButton type="submit" loading={isResetPasswordLoading}>
+                Reset Password
+              </CustomButton>
             </form>
           </>
         );
@@ -380,14 +372,15 @@ const navigate = useNavigate()
   };
 
   return (
-    <div>
+    <>
       <CustomButton onClick={toggleDrawer(true)}>Login</CustomButton>
-
-    
       <CustomDrawer open={open} onClose={toggleDrawer(false)}>
         {renderContent()}
         <CustomDivider />
       </CustomDrawer>
-    </div>
+      <ToastContainer />
+    </>
   );
-}
+};
+
+export default SidebarDrawer;

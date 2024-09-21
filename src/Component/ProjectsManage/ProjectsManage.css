@@ -1,192 +1,174 @@
-.projects-manage {
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  max-width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-h1 {
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.add-category {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+.project-manager {
   width: 100%;
-  justify-content: center; /* Center align */
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  
 }
 
-.add-category input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
+.header {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.new-project-form {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+input,
+select {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
   border-radius: 5px;
-  font-size: 16px;
-  max-width: 300px;
+  border: 1px solid #ddd;
 }
 
-.add-category button {
-  padding: 10px 20px;
-  background-color: #112d4a;
+.add-btn {
+  padding: 10px 30px;
+  background-color: #28a745;
   color: white;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  border: none;
-  width: 150px; /* Fixed width for equal size */
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
 }
 
-.category-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+  justify-content: center;
 }
 
 .project-card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  min-width: 300px;
 }
 
-.project-details {
-  margin-bottom: 15px;
+.project-card:hover {
+  transform: translateY(-5px);
 }
 
-.project-details input,
-.project-details textarea {
-  width: 100%;
-  padding: 10px;
+.project-card h3 {
+  font-size: 1.5rem;
+  color: #333;
   margin-bottom: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
 }
 
-.project-details textarea {
-  resize: vertical;
-  min-height: 80px;
+.project-card p {
+  color: #777;
+  margin-bottom: 10px;
 }
 
-.image-upload {
+.project-images {
   display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.image-upload label {
-  cursor: pointer;
-}
-
-.image-upload button,
-.remove-project {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  width: 150px; /* Fixed width for equal size */
-  background-color: #112d4a;
-  color: white;
-  cursor: pointer;
-}
-
-.remove-project {
-  background-color: #ff4d4d;
-}
-
-.image-gallery {
-  display: flex;
-  flex-wrap: wrap;
+  overflow-x: scroll;
   gap: 10px;
 }
 
-.image-item img {
+.project-images img {
   width: 100%;
   height: auto;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.add-project,
-.update-content {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
+.horizontal-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.vertical-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.edit-btn,
+.delete-btn {
   margin-top: 10px;
-  width: 150px; /* Fixed width for equal size */
-  background-color: #112d4a;
-  color: white;
+  padding: 8px 12px;
+  font-size: 0.8rem;
   cursor: pointer;
-}
-
-.preview-section {
-  margin-top: 30px;
-}
-
-.preview-category {
-  margin-bottom: 20px;
-}
-
-.preview-project {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 15px;
-}
-
-.preview-images {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.preview-image-item img {
-  width: 100%;
-  height: auto;
+  border: none;
   border-radius: 5px;
+  transition: background-color 0.3s ease;
+  width: 200px;
+  height: 40px;
+  margin-left: 10px;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
 }
 
 @media (max-width: 768px) {
-  .add-category {
+  .projects-list {
+    grid-template-columns: 1fr;
+  }
+
+  .new-project-form,
+  .project-card {
+    width: 100%;
+  }
+
+  .project-manager{
+    width: 100%;
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    justify-content: center;
   }
 
-  .add-category input,
-  .add-category button,
-  .image-upload button,
-  .add-project {
+  .projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .new-project-form {
+    margin-bottom: 40px;
     width: 100%;
-  }
-}
-
-@media (max-width: 576px) {
-  h1 {
-    font-size: 1.5em;
-  }
-
-  .add-category input {
-    font-size: 14px;
-  }
-
-  .add-category button {
-    font-size: 14px;
-  }
-
-  .project-details input,
-  .project-details textarea {
-    font-size: 12px;
-  }
-
-  .update-content {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   }
 }

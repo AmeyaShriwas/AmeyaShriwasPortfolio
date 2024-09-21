@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import './Dashboard.css';
 import ManageAboutUs from '../../Component/ManageAboutUs/ManageAboutUs';
 import ProjectsManage from '../../Component/ProjectsManage/ProjectsManage';
 import ExperienceManage from '../../Component/ExperienceManage/ExperienceManage';
 import ManageSkills from '../../Component/SkillsManage/SkillsManage';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import BASE_URL from '../../Api';
 
 const NAVIGATION = [
   { segment: 'about', title: 'About Us', icon: '🏢' },
@@ -69,6 +72,7 @@ function TopRightBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.removeItem('token')
     navigate('/'); // Redirect to login page on logout
   };
 
@@ -89,6 +93,41 @@ function TopRightBar() {
 }
 
 export default function Dashboard() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      navigate('/'); // Redirect to login page if no token
+    } else {
+      // Verify the token by sending a POST request
+      axios.post(`${BASE_URL}/verify-Token`, {}, {
+        headers: {
+          Authorization: `Bearer ${token}` // Send token in Authorization header
+        }
+      })
+      .then(response => {
+        if (response.status === 200) {
+          setIsAuthenticated(true); // Allow rendering if token is verified
+        }
+      })
+      .catch(error => {
+        console.error("Token verification failed:", error);
+        navigate('/'); // Redirect to login page if token is invalid or request fails
+      });
+    }
+  }, [navigate]);
+
+
+  // Render the Dashboard if authenticated, otherwise return null (or a loader)
+  if (!isAuthenticated) {
+    return null; // or you can display a loading spinner
+  }
+
   return (
     <div className="dashboard">
       <TopRightBar />

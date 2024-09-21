@@ -1,187 +1,227 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './ProjectsManage.css';
+import BASE_URL from '../../Api';
 
-export default function ProjectsManage() {
-  const [projects, setProjects] = useState({
-    htmlCssJs: [
-      {
-        title: 'Personal Portfolio Website',
-        description: 'Developed a personal portfolio using HTML, CSS, and JavaScript.',
-        images: []
-      }
-    ],
-    react: [
-      {
-        title: 'E-Commerce Platform',
-        description: 'Developed an e-commerce platform using React.',
-        images: []
-      }
-    ],
-    reactNative: [
-      {
-        title: 'Social Media App',
-        description: 'Developed a social media app using React Native and Firebase.',
-        images: []
-      }
-    ]
+const token = localStorage.getItem('token');
+
+const ProjectManager = () => {
+  const [projects, setProjects] = useState([]);
+  const [newProject, setNewProject] = useState({
+    title: '',
+    description: '',
+    category: '',
   });
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [images, setImages] = useState([]);
 
-  const [newCategory, setNewCategory] = useState('');
-
-  const handleProjectChange = (category, index, field, value) => {
-    const updatedProjects = { ...projects };
-    updatedProjects[category][index] = { ...updatedProjects[category][index], [field]: value };
-    setProjects(updatedProjects);
-  };
-
-  const handleAddProject = (category) => {
-    const updatedProjects = { ...projects };
-    updatedProjects[category].push({ title: '', description: '', images: [] });
-    setProjects(updatedProjects);
-  };
-
-  const handleRemoveProject = (category, index) => {
-    const updatedProjects = { ...projects };
-    if (updatedProjects[category].length > 1) {
-      updatedProjects[category] = updatedProjects[category].filter((_, i) => i !== index);
-      setProjects(updatedProjects);
+  const fetchProjects = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/admin/projects/getProjects`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProjects(response.data.data);
+    } catch (error) {
+      toast.error('Error fetching projects');
     }
   };
 
-  const handleImageUpload = (category, index, event) => {
-    const files = Array.from(event.target.files);
-    const updatedProjects = { ...projects };
-    const newImages = files.map(file => URL.createObjectURL(file));
-    updatedProjects[category][index].images = [...updatedProjects[category][index].images, ...newImages];
-    setProjects(updatedProjects);
-  };
+  const addProject = async () => {
+    try {
+      const formData = new FormData();
+      images.forEach((image) => formData.append('images', image));
+      formData.append('title', newProject.title);
+      formData.append('description', newProject.description);
+      formData.append('category', newProject.category);
 
-  const handleUpdateContent = () => {
-    console.log('Updated Projects Content:', projects);
-  };
+      await axios.post(`${BASE_URL}/admin/projects/add`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-  const handleAddCategory = () => {
-    if (newCategory && !projects[newCategory]) {
-      setProjects({ ...projects, [newCategory]: [] });
-      setNewCategory('');
+      toast.success('Project added successfully');
+      fetchProjects();
+      setNewProject({ title: '', description: '', category: '' });
+      setImages([]);
+    } catch (error) {
+      toast.error('Error adding project');
     }
   };
+
+  const editProject = async (projectId) => {
+    try {
+      const formData = new FormData();
+      images.forEach((image) => formData.append('images', image));
+      formData.append('title', newProject.title);
+      formData.append('description', newProject.description);
+      formData.append('category', newProject.category);
+
+      await axios.put(`${BASE_URL}/admin/projects/edit/${projectId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      toast.success('Project updated successfully');
+      fetchProjects();
+      setNewProject({ title: '', description: '', category: '' });
+      setImages([]);
+      setSelectedProject(null);
+    } catch (error) {
+      toast.error('Error updating project');
+    }
+  };
+
+  const deleteProject = async (projectId) => {
+    try {
+      await axios.delete(`${BASE_URL}/admin/projects/delete/${projectId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      toast.success('Project deleted successfully');
+      fetchProjects();
+    } catch (error) {
+      toast.error('Error deleting project');
+    }
+  };
+
+  const handleSelectImages = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setImages(selectedFiles);
+    toast.info(`${selectedFiles.length} image(s) selected`);
+  };
+
+  const handleImageUpload = async (projectId) => {
+    if (images.length === 0) {
+      toast.warning('Please select images before uploading');
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      images.forEach((image) => formData.append('images', image));
+
+      await axios.post(`${BASE_URL}/admin/projects/${projectId}/images`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      toast.success('Images uploaded successfully');
+      setImages([]);
+      fetchProjects();
+    } catch (error) {
+      toast.error('Error uploading images');
+    }
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   return (
-    <div className="projects-manage">
-      <h1>Manage Projects</h1>
+    <div className="project-manager">
+      <ToastContainer />
+      <h1 className="header">Portfolio Projects</h1>
 
-      {/* Add New Category */}
-      <div className="add-category">
+      <div className="new-project-form">
+        <h2>Add/Edit Project</h2>
         <input
           type="text"
-          placeholder="New Category"
-          value={newCategory}
-          onChange={(e) => setNewCategory(e.target.value)}
+          name="title"
+          placeholder="Title"
+          value={newProject.title}
+          onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
         />
-        <button onClick={handleAddCategory}>Add Category</button>
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          value={newProject.description}
+          onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
+        />
+        <select
+          name="category"
+          value={newProject.category}
+          onChange={(e) => setNewProject({ ...newProject, category: e.target.value })}
+        >
+          <option value="">Select Category</option>
+          <option value="html_css_js">HTML, CSS, JS</option>
+          <option value="react_js">React JS</option>
+          <option value="react_native">React Native</option>
+          <option value="mern_stack">MERN Stack</option>
+          <option value="next_js">Next.js</option>
+        </select>
+        <input type="file" multiple onChange={handleSelectImages} />
+        <button className="add-btn" onClick={selectedProject ? () => editProject(selectedProject) : addProject}>
+          {selectedProject ? '📝 Edit Project' : '➕ Add Project'}
+        </button>
       </div>
 
-      {/* Loop through categories and projects */}
-      {Object.keys(projects).map((category) => (
-        <div key={category} className="category-card">
-          <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+      <div className="projects-list">
+        {projects.map((project) => (
+          <div key={project._id} className="project-card">
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <p>Category: {project.category.replace('_', ' ').toUpperCase()}</p>
 
-          {/* List of projects under each category */}
-          {projects[category].map((project, index) => (
-            <div key={index} className="project-card">
-              <h3>Project {index + 1}</h3>
-              <div className="project-details">
-                <input
-                  type="text"
-                  placeholder={`Project Title ${index + 1}`}
-                  value={project.title}
-                  onChange={(e) => handleProjectChange(category, index, 'title', e.target.value)}
+            <div className="project-images">
+              {project.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={`${BASE_URL}/${image}`}
+                  alt="Project"
+                  className={`project-img ${
+                    project.category === 'react_native' ? 'vertical-img' : 'horizontal-img'
+                  }`}
                 />
-                <textarea
-                  placeholder={`Description ${index + 1}`}
-                  value={project.description}
-                  onChange={(e) => handleProjectChange(category, index, 'description', e.target.value)}
-                />
-                
-                {/* Image Upload Section */}
-                <div className="image-upload">
-                  <input
-                    type="file"
-                    multiple
-                    id={`upload-button-${category}-${index}`}
-                    onChange={(e) => handleImageUpload(category, index, e)}
-                  />
-                  <label htmlFor={`upload-button-${category}-${index}`}>
-                    <button>Upload Images</button>
-                  </label>
-                  <button
-                    className="remove-project"
-                    onClick={() => handleRemoveProject(category, index)}
-                    disabled={projects[category].length <= 1}
-                  >
-                    Remove Project
-                  </button>
-                </div>
-
-                {/* Display uploaded images */}
-                <div className="image-gallery">
-                  {project.images.map((img, imgIndex) => (
-                    <div key={imgIndex} className="image-item">
-                      <img
-                        src={img}
-                        alt={`Project ${index} - Image ${imgIndex}`}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
 
-          {/* Button to add a new project */}
-          <button
-            className="add-project"
-            onClick={() => handleAddProject(category)}
-          >
-            Add Project
-          </button>
-        </div>
-      ))}
+            <button className="edit-btn" onClick={() => {
+              setSelectedProject(project._id);
+              setNewProject({
+                title: project.title,
+                description: project.description,
+                category: project.category,
+              });
+              setImages([]);
+            }}>
+              ✏️ Edit Project
+            </button>
 
-      {/* Button to update all project content */}
-      <button
-        className="update-content"
-        onClick={handleUpdateContent}
-      >
-        Update Content
-      </button>
+            <input
+              type="file"
+              id={`fileInput-${project._id}`}
+              multiple
+              onChange={handleSelectImages}
+              style={{ display: 'none' }}
+            />
+            <button className="edit-btn" onClick={() => document.getElementById(`fileInput-${project._id}`).click()}>
+              📂 Select Images
+            </button>
+            <button className="edit-btn" onClick={() => handleImageUpload(project._id)}>
+              ⬆️ Upload Selected Images
+            </button>
 
-      {/* Preview Section */}
-      <div className="preview-section">
-        <h2>Preview of Projects</h2>
-        {Object.keys(projects).map((category) => (
-          <div key={category} className="preview-category">
-            <h3>{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-            {projects[category].map((project, index) => (
-              <div key={index} className="preview-project">
-                <h4>{project.title}</h4>
-                <p>{project.description}</p>
-                <div className="preview-images">
-                  {project.images.map((img, imgIndex) => (
-                    <div key={imgIndex} className="preview-image-item">
-                      <img
-                        src={img}
-                        alt={`Project ${index} - Image ${imgIndex}`}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+            <button className="delete-btn" onClick={() => deleteProject(project._id)}>
+              🗑️ Delete Project
+            </button>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default ProjectManager;
