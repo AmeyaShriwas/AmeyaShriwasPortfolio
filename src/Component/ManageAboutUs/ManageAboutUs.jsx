@@ -3,11 +3,14 @@ import './ManageAboutUs.css';
 import { AiOutlineDelete } from 'react-icons/ai';
 import axios from 'axios';
 import BASE_URL from '../../Api';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
+import { useNotification } from '../../Component/Notifiction/Notification';
+
 
 export default function ManageAboutUs() {
   const [aboutContentLines, setAboutContentLines] = useState([]);
+  const { showSuccess, showError } = useNotification();
+
 
   // Handling the line input changes
   const handleLineChange = (index, value) => {
@@ -45,12 +48,12 @@ export default function ManageAboutUs() {
     .then(response => {
       console.log('res sta',response.status)
       if (response.status === 200) {
-        toast.success('About Us content updated successfully');
+        showSuccess('About Us content updated successfully');
         console.log('About Us content updated successfully.');
       }
     })
     .catch(error => {
-      toast.error('Error updating About Us content');
+      showError('Error updating About Us content');
       console.log('Error updating About Us content:', error);
     });
   };
@@ -120,7 +123,6 @@ export default function ManageAboutUs() {
               {line || `Line ${index + 1} is empty.`}
             </p>
           ))}
-           <ToastContainer />
         </div>
       </div>
     </div>

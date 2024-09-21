@@ -2,8 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios
 import BASE_URL from '../../Api';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
+import { useNotification } from '../../Component/Notifiction/Notification';
+
 
 
 // Custom Components
@@ -170,6 +171,8 @@ const SidebarDrawer = () => {
   const [isVerifyOtpLoading, setIsVerifyOtpLoading] = React.useState(false);
   const [isResetPasswordLoading, setIsResetPasswordLoading] = React.useState(false);
   const navigate = useNavigate();
+  const { showSuccess, showError } = useNotification();
+
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -186,13 +189,13 @@ const SidebarDrawer = () => {
 
       if (response.status === 200) {
         localStorage.setItem('token', response?.data?.token);
-        toast.success('Login Successfully');
+        showSuccess('Login Successfully');
         navigate('/dashboard');
       } else {
-        toast.error('Invalid Credentials');
+        showError('Invalid Credentials');
       }
     } catch (error) {
-      toast.error('Something went wrong');
+      showError('Something went wrong');
     } finally {
       setIsLoginLoading(false); // Stop loading
     }
@@ -208,12 +211,12 @@ const SidebarDrawer = () => {
 
       if (response.status === 200) {
         setEmailSent(true);
-        toast.success('OTP sent to email');
+        showSuccess('OTP sent to email');
       } else {
-        toast.error('Failed to send OTP');
+        showError('Failed to send OTP');
       }
     } catch (error) {
-      toast.error('Failed to send OTP');
+      showError('Failed to send OTP');
     } finally {
       setIsForgotPasswordLoading(false); // Stop loading
     }
@@ -229,13 +232,13 @@ const SidebarDrawer = () => {
       });
 
       if (response.status === 200) {
-        toast.success('OTP verified');
+        showSuccess('OTP verified');
         setView('resetPassword');
       } else {
-        toast.error('OTP verification failed');
+        showError('OTP verification failed');
       }
     } catch (error) {
-      toast.error('OTP verification failed');
+      showError('OTP verification failed');
     } finally {
       setIsVerifyOtpLoading(false); // Stop loading
     }
@@ -252,13 +255,13 @@ const SidebarDrawer = () => {
       });
 
       if (response.status === 200) {
-        toast.success('Password updated');
+        showSuccess('Password updated');
         setView('login');
       } else {
-        toast.error('Password update failed');
+        showError('Password update failed');
       }
     } catch (error) {
-      toast.error('Password update failed');
+      showError('Password update failed');
     } finally {
       setIsResetPasswordLoading(false); // Stop loading
     }
@@ -378,7 +381,6 @@ const SidebarDrawer = () => {
         {renderContent()}
         <CustomDivider />
       </CustomDrawer>
-      <ToastContainer />
     </>
   );
 };

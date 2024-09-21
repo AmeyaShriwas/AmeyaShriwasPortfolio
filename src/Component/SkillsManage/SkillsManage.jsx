@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SkillsManage.css';
 import BASE_URL from '../../Api';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
+import { useNotification } from '../../Component/Notifiction/Notification';
+
 
 export default function ManageSkills() {
   const [skills, setSkills] = useState([]); // Start with an empty array
+  const { showSuccess, showError } = useNotification();
+
 
   // Fetch skills from the API on component mount
   useEffect(() => {
@@ -71,11 +74,11 @@ export default function ManageSkills() {
       );
 
       // Handle success
-      toast.success('Skills added successfully');
+      showSuccess('Skills added successfully');
       console.log('Skills updated successfully:', response.data);
     } catch (error) {
       // Handle errors
-      console.error('Error updating skills:', error);
+      showError('Error updating skills:', error);
     }
   };
 
@@ -122,7 +125,6 @@ export default function ManageSkills() {
               <span>{skill}</span>
             </div>
           ))}
-          <ToastContainer/>
         </div>
       </div>
     </div>

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import './ProjectsManage.css';
 import BASE_URL from '../../Api';
+import { useNotification } from '../../Component/Notifiction/Notification';
+
 
 const token = localStorage.getItem('token');
 
 const ProjectManager = () => {
   const [projects, setProjects] = useState([]);
+  const { showSuccess, showError } = useNotification();
+
   const [newProject, setNewProject] = useState({
     title: '',
     description: '',
@@ -26,7 +29,7 @@ const ProjectManager = () => {
       });
       setProjects(response.data.data);
     } catch (error) {
-      toast.error('Error fetching projects');
+      showError('Error fetching projects');
     }
   };
 
@@ -45,12 +48,12 @@ const ProjectManager = () => {
         },
       });
 
-      toast.success('Project added successfully');
+      showSuccess('Project added successfully');
       fetchProjects();
       setNewProject({ title: '', description: '', category: '' });
       setImages([]);
     } catch (error) {
-      toast.error('Error adding project');
+      showError('Error adding project');
     }
   };
 
@@ -69,13 +72,13 @@ const ProjectManager = () => {
         },
       });
 
-      toast.success('Project updated successfully');
+      showSuccess('Project updated successfully');
       fetchProjects();
       setNewProject({ title: '', description: '', category: '' });
       setImages([]);
       setSelectedProject(null);
     } catch (error) {
-      toast.error('Error updating project');
+      showError('Error updating project');
     }
   };
 
@@ -87,22 +90,22 @@ const ProjectManager = () => {
         },
       });
 
-      toast.success('Project deleted successfully');
+      showSuccess('Project deleted successfully');
       fetchProjects();
     } catch (error) {
-      toast.error('Error deleting project');
+      showError('Error deleting project');
     }
   };
 
   const handleSelectImages = (e) => {
     const selectedFiles = Array.from(e.target.files);
     setImages(selectedFiles);
-    toast.info(`${selectedFiles.length} image(s) selected`);
+    showSuccess(`${selectedFiles.length} image(s) selected`);
   };
 
   const handleImageUpload = async (projectId) => {
     if (images.length === 0) {
-      toast.warning('Please select images before uploading');
+      showSuccess('Please select images before uploading');
       return;
     }
 
@@ -117,11 +120,11 @@ const ProjectManager = () => {
         },
       });
 
-      toast.success('Images uploaded successfully');
+      showSuccess('Images uploaded successfully');
       setImages([]);
       fetchProjects();
     } catch (error) {
-      toast.error('Error uploading images');
+      showError('Error uploading images');
     }
   };
 
@@ -131,7 +134,6 @@ const ProjectManager = () => {
 
   return (
     <div className="project-manager">
-      <ToastContainer />
       <h1 className="header">Portfolio Projects</h1>
 
       <div className="new-project-form">

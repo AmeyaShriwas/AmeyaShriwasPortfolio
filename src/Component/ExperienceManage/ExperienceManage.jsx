@@ -3,13 +3,16 @@ import './ExperienceManage.css'; // Import custom CSS file
 import { AiOutlineDelete } from 'react-icons/ai';
 import axios from 'axios';
 import BASE_URL from '../../Api';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { useEffect } from 'react';
+import { useNotification } from '../../Component/Notifiction/Notification';
+
 
 
 export default function ExperienceManage() {
   const [experiences, setExperiences] = useState([]);
+  const { showSuccess, showError } = useNotification();
+
 
   const handleExperienceChange = (index, field, value) => {
     const updatedExperiences = [...experiences];
@@ -39,12 +42,12 @@ export default function ExperienceManage() {
     .then(response => {
       console.log('res sta',response.status)
       if (response.status === 200) {
-        toast.success('Experience content updated successfully');
+        showSuccess('Experience content updated successfully');
         console.log('Experience content updated successfully.');
       }
     })
     .catch(error => {
-      toast.error('Error updating Experience content');
+      showError('Error updating Experience content');
       console.log('Error updating Experience content:', error);
     });
     console.log('Updated Experience Content:', experiences);
@@ -129,7 +132,6 @@ export default function ExperienceManage() {
               <p className="content-preview">{exp.content}</p>
             </div>
           ))}
-           <ToastContainer />
         </div>
       </div>
     </div>
