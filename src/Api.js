@@ -1,2 +1,2 @@
-const BASE_URL = 'http://admin.ameyashriwas.com:3300'
+const BASE_URL = 'https://admin.ameyashriwas.com'
 export default BASE_URL
