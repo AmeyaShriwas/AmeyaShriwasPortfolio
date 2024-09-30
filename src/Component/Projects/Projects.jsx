@@ -7,6 +7,7 @@ import BASE_URL from '../../Api'; // Ensure the BASE_URL import is correct
 const Projects = () => {
   const [projectsData, setProjectsData] = useState([]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [loading, setLoading] = useState(true); // Loading state
 
   // Update window width for responsive design
   useEffect(() => {
@@ -27,6 +28,8 @@ const Projects = () => {
       }
     } catch (error) {
       console.error('Error fetching projects:', error);
+    } finally {
+      setLoading(false); // Hide the loader once the data is fetched
     }
   };
 
@@ -60,7 +63,7 @@ const Projects = () => {
           {images.length > 3 && (
             <Slider>
               {images.slice(3).map((img, index) => (
-                <img key={index} src={img} alt={`Slide ${index}`} className="project-imageM" />
+                <img key={index} src={`${BASE_URL}/${img}`} alt={`Slide ${index}`} className="project-imageM" />
               ))}
             </Slider>
           )}
@@ -73,17 +76,21 @@ const Projects = () => {
     <section id="projects" className="section">
       <h2>Projects</h2>
 
-      <div className="project-category">
-        <div className="project-grid">
-          {projectsData.map((project) => (
-            <div className="project" key={project._id}>
-              <h4>{project.title}</h4>
-              <p>{project.description}</p>
-              {renderImages(project.images)} {/* Handle multiple images */}
-            </div>
-          ))}
+      {loading ? (
+        <div className="loader"></div> // Show loader while data is being fetched
+      ) : (
+        <div className="project-category">
+          <div className="project-grid">
+            {projectsData.map((project) => (
+              <div className="project" key={project._id}>
+                <h4>{project.title}</h4>
+                <p>{project.description}</p>
+                {renderImages(project.images)} {/* Handle multiple images */}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

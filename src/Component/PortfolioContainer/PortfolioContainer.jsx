@@ -33,30 +33,15 @@ const PortfolioContainer = () => {
             </div>
             <div className="portfolio-right">
                 <div className="tabsMain">
-                    <button 
-                        className={`tab ${activeTab === 'about' ? 'active' : ''}`} 
-                        onClick={() => setActiveTab('about')}
-                    >
-                        About
-                    </button>
-                    <button 
-                        className={`tab ${activeTab === 'experience' ? 'active' : ''}`} 
-                        onClick={() => setActiveTab('experience')}
-                    >
-                        Experience
-                    </button>
-                    <button 
-                        className={`tab ${activeTab === 'projects' ? 'active' : ''}`} 
-                        onClick={() => setActiveTab('projects')}
-                    >
-                        Projects
-                    </button>
-                    <button 
-                        className={`tab ${activeTab === 'skills' ? 'active' : ''}`} 
-                        onClick={() => setActiveTab('skills')}
-                    >
-                        Skills
-                    </button>
+                    {['about', 'experience', 'projects', 'skills'].map(tab => (
+                        <button
+                            key={tab}
+                            className={`tab ${activeTab === tab ? 'active' : ''}`}
+                            onClick={() => setActiveTab(tab)}
+                        >
+                            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                        </button>
+                    ))}
                 </div>
                 <div className="tab-content">
                     {renderSection()}

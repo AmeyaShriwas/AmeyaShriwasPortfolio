@@ -118,21 +118,21 @@ select {
 }
 
 .edit-btn {
-  background-color: #007bff;
+  background-color: #112D4A;
   color: white;
 }
 
 .edit-btn:hover {
-  background-color: #0056b3;
+  background-color: #112D4A;
 }
 
 .delete-btn {
-  background-color: #dc3545;
+  background-color: #112D4A;
   color: white;
 }
 
 .delete-btn:hover {
-  background-color: #c82333;
+  background-color: #112D4A;
 }
 
 @media (max-width: 768px) {

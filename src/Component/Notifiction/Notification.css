@@ -1,25 +1,33 @@
 /* Notification.css */
-
 .notification-container {
     position: fixed;
     bottom: 20px;
     left: 20px;
     z-index: 1000;
-  }
-  
-  .notification {
+}
+
+.notification {
     margin: 10px 0;
     padding: 15px;
     border-radius: 5px;
     color: white;
-    transition: opacity 0.5s ease;
-  }
-  
-  .success {
+    transition: width 0.5s ease, transform 0.5s ease, opacity 0.5s ease;
+    opacity: 1; /* Start with full opacity */
+}
+
+.success {
     background-color: green;
-  }
-  
-  .error {
+}
+
+.error {
     background-color: red;
-  }
-  
+}
+
+/* Fade out effect */
+.notification {
+    opacity: 0; /* Initially invisible for animation */
+}
+
+.notification.success, .notification.error {
+    opacity: 1; /* Visible once the width is increased */
+}

@@ -1,120 +1,122 @@
-/* Container for the entire portfolio layout */
+/* General styling for the portfolio container */
 .portfolio-container {
     display: flex;
-    flex-direction: row; /* Arrange items horizontally */
-    height: 100vh;
-    width: 100%;
-    background: linear-gradient(135deg, #f0f4f8, #e0e9f2); /* Soft gradient background */
+    flex-direction: row;
+    min-height: 100vh;
+    background: #f5f7fa;
 }
 
-/* Styling for the left side (Profile and Social Icons) */
+/* Styling for the left side - profile section */
 .portfolio-left {
     width: 25%;
-    min-width: 320px;
-    padding: 0px;
-    background: #ffffff; /* Darker background for left side */
-    color: #ffffff; /* Light text color */
+    padding: 20px;
+    background: #ffffff;
+    border-right: 1px solid #ddd;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    overflow: auto; /* Allow scrolling if content overflows */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: background 0.3s ease; /* Smooth background transition */
+    transition: all 0.3s ease;
 }
 
+.portfolio-left:hover {
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.1);
+}
 
-/* Styling for the right side (Tab content) */
+/* Styling for the right side - content section */
 .portfolio-right {
-    width: 75%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    background: #ffffff; /* Light background for right side */
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    border-radius: 8px; /* Rounded corners */
-    transition: background 0.3s ease; /* Smooth background transition */
+    flex: 1;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease;
 }
 
 .portfolio-right:hover {
-    background: #f9f9f9; /* Slightly different background on hover */
+    background: #f8f9fc;
 }
 
-/* Tabs for section navigation */
+/* Tabs for navigation */
 .tabsMain {
     display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping of tabs */
-    margin-bottom: 20px; /* Spacing below tabs */
-    background: #ffffff; /* Background for tabs */
-    position: sticky; /* Keep tabs fixed at the top */
-    top: 0;
-    z-index: 10; /* Ensure tabs stay on top of other content */
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for tabs */
-    border-radius: 8px; /* Rounded corners for tabs */
-    transition: background 0.3s ease; /* Smooth background transition */
+    justify-content: space-around;
+    background: #ffffff;
+    padding: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .tab {
-    background: #e1e5eb;
-    border: 1px solid #d1d7dd;
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background: #f1f3f7;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 12px 20px;
-    margin: 0 5px; /* Add margin for spacing */
     cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease; /* Smooth transitions */
-    text-align: center; /* Center text */
-    flex: 1; /* Allow tabs to expand equally */
+    transition: all 0.3s ease;
+    margin: 0 5px;
 }
 
 .tab:hover {
-    background: #c9d1d9; /* Change background on hover */
+    background: #e2e6ea;
 }
 
 .tab.active {
-    background: #112d4a; /* Active tab background */
-    color: #ffffff; /* Active tab text color */
-    border-color: #112d4a;
+    background: #112D4A;
+    color: #fff;
+    border-color: #0056b3;
 }
 
-/* Content section within tabs */
+/* Tab content styling */
 .tab-content {
-    padding: 20px;
-    border-radius: 8px;
     background: #ffffff;
-    flex: 1; /* Allow content area to expand and fill available space */
-    overflow-y: auto; /* Allow vertical scrolling */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: background 0.3s ease; /* Smooth background transition */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
+    transition: background 0.3s ease;
 }
 
-/* Responsive adjustments */
+.tab-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .portfolio-container {
         flex-direction: column;
-        height: auto;
-        padding: 0;
     }
 
     .portfolio-left, .portfolio-right {
         width: 100%;
         padding: 10px;
+        margin: 0;
+        box-shadow: none;
     }
 
     .tabsMain {
-        flex-direction: column; /* Stack tabs vertically on small screens */
-        position: static; /* Reset position on smaller screens */
-        gap: 15px;
+        flex-direction: column;
     }
 
     .tab {
-        flex: none; /* Prevent tabs from growing */
+        margin: 10px 0;
     }
 }
 
 @media (max-width: 480px) {
     .tab {
-        font-size: 0.9em; /* Reduce font size on very small screens */
-        padding: 10px 15px;
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+
+    .tab-content {
+        padding: 15px;
     }
 }

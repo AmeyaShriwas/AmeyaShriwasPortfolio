@@ -25,13 +25,12 @@ h3 {
     justify-content: center;
 }
 
-/* Default styling for projects grid (for larger screens) */
 .project {
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: calc(50% - 20px); /* Adjust width to fit two projects in a row */
+    width: calc(50% - 20px);
     box-sizing: border-box;
     text-align: center;
 }
@@ -43,7 +42,7 @@ h4 {
 
 p {
     font-size: 1rem;
-    line-height: 1.4; /* Adjust line height for readability */
+    line-height: 1.4;
     margin-bottom: 10px;
 }
 
@@ -54,23 +53,40 @@ p {
     margin-top: 10px;
 }
 
-/* Responsive adjustments for screens smaller than 768px */
 @media (max-width: 768px) {
     .project-grid {
-        flex-direction: column; /* Stack projects in a single column */
-        gap: 10px; /* Reduce gap between projects */
+        flex-direction: column;
+        gap: 10px;
     }
 
     .project {
-        width: 100%; /* Full width for each project in a column */
-        padding: 15px; /* Adjust padding for better spacing */
+        width: 100%;
+        padding: 15px;
     }
 }
-.project-images{
+
+.project-images {
     display: flex;
     gap: 10px;
 }
-.project-imageM{
+
+.project-imageM {
     height: 300px;
     width: 150px;
+}
+
+/* Loader styling */
+.loader {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #112D4A; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
