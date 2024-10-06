@@ -6,11 +6,13 @@ import BASE_URL from '../../Api';
 import { useNotification } from '../../Component/Notifiction/Notification';
 
 
-const token = localStorage.getItem('token');
+// const token = localStorage.getItem('token');
 
 const ProjectManager = () => {
   const [projects, setProjects] = useState([]);
   const { showSuccess, showError } = useNotification();
+  const [token, setToken] = useState(localStorage.getItem('token')); // State to store the token
+
 
   const [newProject, setNewProject] = useState({
     title: '',
@@ -84,6 +86,7 @@ const ProjectManager = () => {
 
   const deleteProject = async (projectId) => {
     try {
+      console.log('token', token)
       await axios.delete(`${BASE_URL}/admin/projects/delete/${projectId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
