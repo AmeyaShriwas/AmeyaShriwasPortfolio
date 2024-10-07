@@ -67,7 +67,7 @@ const ProjectManager = () => {
       formData.append('description', newProject.description);
       formData.append('category', newProject.category);
 
-      await axios.put(`${BASE_URL}/admin/projects/edit/${projectId}`, formData, {
+      await axios.post(`${BASE_URL}/admin/projects/edit/${projectId}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
