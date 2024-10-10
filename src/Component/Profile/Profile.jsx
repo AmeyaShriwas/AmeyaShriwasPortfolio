@@ -26,7 +26,7 @@ const Profile = () => {
           <FaTwitter />
         </a>
       </div>
-      <a href="https://drive.google.com/file/d/1E8rWjATajhd_gV01Z-M2ht-TBM-HfMSN/view?usp=sharing" target="_blank" className="download-cv-button">Download CV</a>
+      <a href="https://drive.google.com/file/d/1Y1fv7t522MnCP5XRYQqfcJhIg_oV9iBV/view" target="_blank" className="download-cv-button">Download CV</a>
 
       <SidebarDrawer/>
     </div>
